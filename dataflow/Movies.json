@@ -1,0 +1,35 @@
+{
+	"name": "Movies",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "Movies",
+						"type": "DatasetReference"
+					},
+					"name": "Movies"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "MoviesAgg",
+						"type": "DatasetReference"
+					},
+					"name": "Save"
+				}
+			],
+			"transformations": [
+				{
+					"name": "ModifyColumns"
+				},
+				{
+					"name": "AggMoviesByYear"
+				}
+			],
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false) ~> Movies\nMovies derive(Year = toInteger(trim(right(byName('title'),6), '()')),\n\t\tTitle = toString(left(byName('title'), length(byName('title'))-6))) ~> ModifyColumns\nModifyColumns aggregate(groupBy(Year),\n\tTitle = count('Title')) ~> AggMoviesByYear\nAggMoviesByYear sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> Save"
+		}
+	}
+}
