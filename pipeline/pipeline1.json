@@ -26,6 +26,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "Movies Pipeline"
+		},
 		"annotations": []
 	},
 	"type": "Microsoft.DataFactory/factories/pipelines"
