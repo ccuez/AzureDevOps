@@ -1,0 +1,23 @@
+{
+	"name": "iris",
+	"properties": {
+		"folder": {
+			"name": "ML"
+		},
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "iris_data",
+						"type": "DatasetReference"
+					},
+					"name": "iris"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tlimit: 100) ~> iris"
+		}
+	}
+}

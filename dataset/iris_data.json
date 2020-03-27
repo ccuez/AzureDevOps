@@ -5,11 +5,6 @@
 			"referenceName": "AzureBlobStorage1",
 			"type": "LinkedServiceReference"
 		},
-		"parameters": {
-			"Title": {
-				"type": "string"
-			}
-		},
 		"folder": {
 			"name": "ML"
 		},
@@ -23,29 +18,9 @@
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
+			"firstRowAsHeader": true,
 			"quoteChar": "\""
 		},
-		"schema": [
-			{
-				"name": "sepal_length",
-				"type": "Integer"
-			},
-			{
-				"name": "sepal_width",
-				"type": "Integer"
-			},
-			{
-				"name": "petal_length",
-				"type": "Integer"
-			},
-			{
-				"name": "petal_width",
-				"type": "Integer"
-			},
-			{
-				"name": "class",
-				"type": "String"
-			}
-		]
+		"schema": []
 	}
 }
