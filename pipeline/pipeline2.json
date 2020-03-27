@@ -1,9 +1,29 @@
 {
-	"name": "pipeline1",
+	"name": "pipeline2",
 	"properties": {
 		"activities": [
 			{
-				"name": "MoviesPipeLine",
+				"name": "ML Execute Iris",
+				"type": "AzureMLExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "iris",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": []
+			},
+			{
+				"name": "iris",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +36,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "Movies",
+						"referenceName": "iris",
 						"type": "DataFlowReference"
 					},
 					"compute": {
@@ -27,9 +47,8 @@
 			}
 		],
 		"folder": {
-			"name": "Movies Pipeline"
+			"name": "ML Pipelines"
 		},
 		"annotations": []
-	},
-	"type": "Microsoft.DataFactory/factories/pipelines"
+	}
 }
